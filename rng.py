@@ -1,6 +1,6 @@
 from PIL import ImageGrab
 import time
-import Primes
+from Primes import Primes
 
 
 def get_seed_from_pixel():
@@ -15,19 +15,19 @@ def get_seed_from_pixel():
 
 
 def main():
+    primes = Primes()
     pixel_seed = get_seed_from_pixel()
-    primes_list = Primes.Primes(range_from=2, range_to=pixel_seed)
-    lower = Primes.Primes.get_lower(primes_list, user_val=pixel_seed)
-    higher = Primes.Primes.get_higher(primes_list, user_val=pixel_seed)
-    return f'pixel_seed = {pixel_seed}\nhigher = {higher},\nlower = {lower}\n'
+    first_higher = Primes.getFirstHigher(primes, pixel_seed)
+    first_lower = Primes.getFirstLower(primes, pixel_seed)
+    return f'pixel_seed = {pixel_seed}\nFirst higher = {first_higher}\nFirst lower = {first_lower}\n'
 
 
 if __name__ == '__main__':
     with open("output.txt", "w+") as file:
-        for i in range(100):
+        for i in range(10):
             file.write(main())
             time.sleep(0.5)
 
     file.close()
-    # time.sleep(5)
+    # time.sleep(1)
     # print(main())

@@ -1,42 +1,37 @@
+def isPrime(value):
+    if value > 1:  # every prime value is bigger than 1
+        for divisor in range(2, value):  # every prime value is dividable by 1
+            if value % divisor == 0:
+                return True
+
+        return False
+
+
 class Primes:
-    def __init__(self, range_from, range_to):
-        self.primes = []
-        self.user_from = range_from
-        self.user_to = range_to + 3
-        try:
-            for i in range(self.user_from, self.user_to):
-                for x in range(2, i):
-                    if (i % x) == 0:
-                        break
-                else:
-                    self.primes.append(i)
-        except Exception as e:
-            print(e)
+    def __init__(self):
+        self.higher_prime = None
+        self.lower_prime = None
+        self.prime = None
 
-    def display(self):
-        for i in self.primes:
-            print(i)
+    def getPrimeValue(self):
+        if self.prime is not None:
+            return self.prime
+        else:
+            return None
 
-    def get_higher(self, user_val):
-        try:
-            i = 0
-            lowest = self.primes[i]
-            while lowest < user_val:
-                i = i + 1
-                lowest = self.primes[i]
+    def getFirstHigher(self, value):
+        local_var = value
+        while isPrime(local_var):
+            local_var = local_var + 1
 
-            return self.primes[i]
-        except Exception as e:
-            print(e)
+        self.higher_prime = local_var
+        return self.higher_prime
 
-    def get_lower(self, user_val):
-        try:
-            i = 0
-            lowest = self.primes[i]
-            while lowest < user_val:
-                i = i + 1
-                lowest = self.primes[i]
+    def getFirstLower(self, value):
+        local_var = value
+        while isPrime(local_var):
+            local_var = local_var - 1
 
-            return self.primes[i - 1]
-        except Exception as e:
-            print(e)
+        self.lower_prime = local_var
+        return self.lower_prime
+        pass
