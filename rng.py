@@ -1,13 +1,16 @@
+import sys
+
 from PIL import ImageGrab
 import time
-from Primes import Primes
+import Primes
+import RNGutils
 
 
 def get_seed_from_pixel():
     image = ImageGrab.grab()
     w, h = image.size
-    w_cord = round(time.time()) % w
-    h_cord = round(time.time()) % h
+    w_cord = round(time.time() * 1000) % w
+    h_cord = round(time.time() * 1000) % h
     pixel_values = image.load()
     pixel = pixel_values[w_cord, h_cord]
     mean_pixel_value = sum(pixel, 0) / 3
@@ -15,19 +18,28 @@ def get_seed_from_pixel():
 
 
 def main():
-    primes = Primes()
-    pixel_seed = get_seed_from_pixel()
-    first_higher = Primes.getFirstHigher(primes, pixel_seed)
-    first_lower = Primes.getFirstLower(primes, pixel_seed)
-    return f'pixel_seed = {pixel_seed}\nFirst higher = {first_higher}\nFirst lower = {first_lower}\n'
+    primes = Primes.Primes()
+    rng = RNGutils.RNGutils()
+    seed = get_seed_from_pixel()
+    if sys.argv[1] == "--sequention":
+        with open("output.txt", "a+") as file:
+            random_array = rng.sequention(primes, seed, sys.argv[2])
+            for number in random_array:
+                file.write(str(number))
+                print(number)
+
+        file.close()
+
+    elif sys.argv[1] == "--single":
+        print("Chosen single\n")
+        with open("output.txt", "a+") as file:
+            string = f'{rng.single(primes=primes, pixel_seed=seed)}\n'
+            if "-" not in string:
+                file.write(string)
+                print(string)
+
+        file.close()
 
 
 if __name__ == '__main__':
-    with open("output.txt", "w+") as file:
-        for i in range(10):
-            file.write(main())
-            time.sleep(0.5)
-
-    file.close()
-    # time.sleep(1)
-    # print(main())
+    main()
