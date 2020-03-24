@@ -25,7 +25,7 @@ def main():
         with open("output.txt", "a+") as file:
             random_array = rng.sequention(primes, seed, sys.argv[2])
             for number in random_array:
-                file.write(str(number))
+                file.write(f'{number}\n')
                 print(number)
 
         file.close()
