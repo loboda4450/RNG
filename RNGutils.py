@@ -16,7 +16,7 @@ class RNGutils:
             self.b0 = (lower_prime ** 2) % self.m
             self.d0 = (higher_prime ** 2) % self.m
             self.l0 = int(time.time())*1000
-            self.f0 = self.b0 * self.d0 * int(time.time()) % rnd_range
+            self.f0 = self.b0 * self.d0 * self.l0 % rnd_range
         except Exception as e:
             print(e)
 
@@ -26,9 +26,9 @@ class RNGutils:
                 self.m = primes.lower_prime * primes.higher_prime
                 self.b0 = (self.b0 ** 2) % self.m
                 self.d0 = (self.d0 ** 2) % self.m
+                self.l0 = (self.l0*primes.lower_prime + primes.higher_prime) % self.m
                 self.f0 = self.b0 * self.d0 * self.l0 % rnd_range
                 self.random_array.append(self.f0)
-                time.sleep(0.5)
             except Exception as e:
                 print(e)
         pass
