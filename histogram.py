@@ -9,7 +9,7 @@ def main():
 
     file.close()
 
-    plotter.hist(f0, 15)
+    plotter.hist(f0, 10)
     plotter.show()
 
 
