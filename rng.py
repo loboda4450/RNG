@@ -1,5 +1,4 @@
 import sys
-
 from PIL import ImageGrab
 import time
 import Primes
