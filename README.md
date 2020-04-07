@@ -11,7 +11,7 @@ Implementation could be better (just use Sieve of Eratosthenes to generate prime
 ```rng.py --sequence [size of sequence] [range of random numbers]```
 
 ### Multithread
-Implementation is same as singlethread, but I've added workers, that distribute the same amount of work for each one. What's more, checking for sys.argv is removed, same as --single mode, cuz multithread version is faster only when we generate over 1 milion numbers ( 100 milion 8bit takes ~25secs on stock Ryzen 7 2700 using all 16 threads instead of 230secs).
+Implementation is same as singlethread, but I've added workers, that distribute the same amount of work for each one. What's more, checking for sys.argv is removed, same as --single mode, cuz multithread version is faster only when we generate over 1 milion numbers ( 100 milion 8bit takes ~25secs on stock Ryzen 7 2700 using all 16 threads instead of 230secs). It's still not a optimal solution, cuz it consumes huge amount of RAM. __Remember to clean the output.txt before every trigger, cuz in multithread version each worker append his part to output.txt file__ (u won't end up with over 5GB .txt file, same as me XD...)
 
 ##### Executing:
 ```rng_multithread.py [size of sequence] [range of random numbers] [threads amount you want to use]```
