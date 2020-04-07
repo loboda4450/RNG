@@ -16,6 +16,6 @@ Implementation is same as singlethread, but I've added workers, that distribute 
 ##### Executing:
 ```rng_multithread.py [size of sequence] [range of random numbers] [threads amount you want to use]```
 
-Histogram for 100k 8bit numbers (10 bins, singlethread):
+### Histogram for 100k 8bit numbers (10 bins, singlethread):
 ![Histogram](https://raw.githubusercontent.com/loboda4450/RNG/master/hist.png)
 
