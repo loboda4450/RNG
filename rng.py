@@ -52,7 +52,6 @@ def main():
             random_array = rng.sequence(primes=primes, pixel_seed=seed, length=sys.argv[2], rnd_range=int(sys.argv[3]))
             for number in random_array:
                 file.write(f'{number}\n')
-                # print(number)
 
         file.close()
         end = time.time()

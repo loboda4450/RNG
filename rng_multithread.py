@@ -34,13 +34,11 @@ def worker(seed, length, threads):
 
 
 def main():
-    seed = get_seed_from_pixel()
-
     start = time.time()
     processes = []
 
     for i in range(int(sys.argv[3])):
-        p = multiprocessing.Process(target=worker, args=(seed, int(sys.argv[1]), int(sys.argv[3]),))
+        p = multiprocessing.Process(target=worker, args=(get_seed_from_pixel(), int(sys.argv[1]), int(sys.argv[3]),))
         processes.append(p)
         p.start()
 

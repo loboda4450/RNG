@@ -3,4 +3,3 @@ venv
 .idea
 tester.py
 BetterPrimes.py
-histogram.py
