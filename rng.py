@@ -15,7 +15,7 @@ def check_sysargs(sysargs):
         else:
             print(f'mode: {sysargs[1]},\nrandom number range: {sysargs[2]}')
             pass
-    elif sysargs[1] == '--sequention':
+    elif sysargs[1] == '--sequence':
         args = 4
         if len(sysargs) != args:
             print(f'You provided {len(sysargs) - 1} out of {args} required arguments')
@@ -46,10 +46,10 @@ def main():
     rng = RNGutils.RNGutils()
     seed = get_seed_from_pixel()
 
-    if sys.argv[1] == "--sequention":
+    if sys.argv[1] == "--sequence":
         start = time.time()
         with open("output.txt", "w+") as file:
-            random_array = rng.sequention(primes=primes, pixel_seed=seed, length=sys.argv[2], rnd_range=int(sys.argv[3]))
+            random_array = rng.sequence(primes=primes, pixel_seed=seed, length=sys.argv[2], rnd_range=int(sys.argv[3]))
             for number in random_array:
                 file.write(f'{number}\n')
                 # print(number)

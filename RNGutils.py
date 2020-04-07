@@ -20,7 +20,7 @@ class RNGutils:
         except Exception as e:
             print(e)
 
-    def sequention_handler(self, primes, sequention_length, rnd_range):
+    def sequence_handler(self, primes, sequention_length, rnd_range):
         for i in range(int(sequention_length)):
             try:
                 self.m = primes.lower_prime * primes.higher_prime
@@ -39,9 +39,9 @@ class RNGutils:
         self.single_handler(lower_prime=primes.lower_prime, higher_prime=primes.higher_prime, rnd_range=rnd_range)
         return int(self.f0)
 
-    def sequention(self, primes, pixel_seed, length, rnd_range):
+    def sequence(self, primes, pixel_seed, length, rnd_range):
         primes.getFirstHigher(seed=pixel_seed)
         primes.getFirstLower(seed=pixel_seed)
         self.single_handler(lower_prime=primes.lower_prime, higher_prime=primes.higher_prime, rnd_range=rnd_range)
-        self.sequention_handler(primes=primes, sequention_length=length, rnd_range=rnd_range)
+        self.sequence_handler(primes=primes, sequention_length=length, rnd_range=rnd_range)
         return self.random_array
