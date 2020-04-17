@@ -8,7 +8,7 @@ from math import log, e
 class RNGutils:
     def __init__(self):
         self.random_array = []
-        self.entropy = None
+        self.entropy = 0.
         self.b0 = None
         self.d0 = None
         self.f0 = None
