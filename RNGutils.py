@@ -1,9 +1,14 @@
+import collections
 import time
+from scipy.stats import entropy
+import numpy as np
+from math import log, e
 
 
 class RNGutils:
     def __init__(self):
         self.random_array = []
+        self.entropy = None
         self.b0 = None
         self.d0 = None
         self.f0 = None
@@ -20,6 +25,7 @@ class RNGutils:
         except Exception as e:
             print(e)
 
+
     def sequence_handler(self, primes, sequention_length, rnd_range):
         for i in range(int(sequention_length)):
             try:
@@ -31,7 +37,23 @@ class RNGutils:
                 self.random_array.append(self.f0)
             except Exception as e:
                 print(e)
-        pass
+
+
+    def entropy_handler(self, base=None):
+        n_labels = len(self.random_array)
+        if n_labels <= 1:
+            return 0
+
+        value, counts = np.unique(self.random_array, return_counts=True)
+        probs = counts / n_labels
+        n_classes = np.count_nonzero(probs)
+        if n_classes <= 1:
+            return 0
+
+        base = e if base is None else base
+        for i in probs:
+            self.entropy -= i * log(i, base)
+
 
     def single(self, primes, pixel_seed, rnd_range):
         primes.getFirstHigher(seed=pixel_seed)
@@ -44,4 +66,5 @@ class RNGutils:
         primes.getFirstLower(seed=pixel_seed)
         self.single_handler(lower_prime=primes.lower_prime, higher_prime=primes.higher_prime, rnd_range=rnd_range)
         self.sequence_handler(primes=primes, sequention_length=length, rnd_range=rnd_range)
+        self.entropy_handler(base=2)
         return self.random_array

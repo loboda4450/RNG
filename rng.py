@@ -3,6 +3,7 @@ from PIL import ImageGrab
 import time
 import Primes
 import RNGutils
+import matplotlib.pyplot as plotter
 
 
 def check_sysargs(sysargs):
@@ -54,7 +55,11 @@ def main():
 
         file.close()
         end = time.time()
-        print(f'{sys.argv[2]} random numbers sequence generated in {end - start}')
+
+        plotter.hist(random_array, int(sys.argv[3]))
+        plotter.show()
+
+        print(f'{sys.argv[2]} random numbers sequence generated in {end - start}\nentropy: {rng.entropy}')
 
     elif sys.argv[1] == "--single":
         print("Single mode\n")

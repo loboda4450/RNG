@@ -8,10 +8,8 @@ def main():
             f0.append(int(line.strip()))
 
     file.close()
-
-    plotter.hist(f0, 10)
+    plotter.hist(f0, 256)
     plotter.show()
-
 
 if __name__ == '__main__':
     main()
