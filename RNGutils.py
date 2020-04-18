@@ -1,6 +1,4 @@
-import collections
 import time
-from scipy.stats import entropy
 import numpy as np
 from math import log, e
 
@@ -22,8 +20,8 @@ class RNGutils:
             self.d0 = (higher_prime ** 2) % self.m
             self.l0 = int(time.time())*1000
             self.f0 = self.b0 * self.d0 * self.l0 % rnd_range
-        except Exception as e:
-            print(e)
+        except Exception as exception:
+            print(exception)
 
 
     def sequence_handler(self, primes, sequention_length, rnd_range):
