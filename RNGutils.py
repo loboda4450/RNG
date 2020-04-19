@@ -24,8 +24,8 @@ class RNGutils:
             print(exception)
 
 
-    def sequence_handler(self, primes, sequention_length, rnd_range):
-        for i in range(int(sequention_length)):
+    def sequence_handler(self, primes, sequence_length, rnd_range):
+        for i in range(int(sequence_length)):
             try:
                 self.m = primes.lower_prime * primes.higher_prime
                 self.b0 = (self.b0 ** 2) % self.m
@@ -63,6 +63,6 @@ class RNGutils:
         primes.getFirstHigher(seed=pixel_seed)
         primes.getFirstLower(seed=pixel_seed)
         self.single_handler(lower_prime=primes.lower_prime, higher_prime=primes.higher_prime, rnd_range=rnd_range)
-        self.sequence_handler(primes=primes, sequention_length=length, rnd_range=rnd_range)
+        self.sequence_handler(primes=primes, sequence_length=length, rnd_range=rnd_range)
         self.entropy_handler(base=2)
         return self.random_array

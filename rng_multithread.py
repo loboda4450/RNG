@@ -1,5 +1,6 @@
 import multiprocessing
 import sys
+import os
 
 from PIL import ImageGrab
 import time
@@ -19,26 +20,31 @@ def get_seed_from_pixel():
     return round(mean_pixel_value)
 
 
-def worker(seed, length, threads):
+def worker(seed, length, threads, rnd_range):
     primes = Primes.Primes()
     rng = RNGutils.RNGutils()
 
     with open("output.txt", "a+") as file:
-        random_array = rng.sequence(primes=primes, pixel_seed=seed, length=int(length / threads), rnd_range=int(sys.argv[2]))
-        for number in random_array:
-            file.write(f'{number}\n')
+        [file.write(f'{number}\n') for number in rng.sequence(primes=primes, pixel_seed=seed, length=int(length / threads),
+                                    rnd_range=rnd_range)]
 
-        file.close()
+    file.close()
 
     return
 
 
 def main():
+    try:
+        os.remove('output.txt')
+        print('removed output file!')
+    except Exception as e:
+        print(f'Error: {e}')
+
     start = time.time()
     processes = []
 
     for i in range(int(sys.argv[3])):
-        p = multiprocessing.Process(target=worker, args=(get_seed_from_pixel(), int(sys.argv[1]), int(sys.argv[3]),))
+        p = multiprocessing.Process(target=worker, args=(get_seed_from_pixel(), int(sys.argv[1]), int(sys.argv[3]), int(sys.argv[2])))
         processes.append(p)
         p.start()
 

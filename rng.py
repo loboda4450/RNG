@@ -45,13 +45,12 @@ def main():
     primes = Primes.Primes()
     rng = RNGutils.RNGutils()
     seed = get_seed_from_pixel()
+    random_array = []
 
     if sys.argv[1] == "--sequence":
         start = time.time()
         with open("output.txt", "w+") as file:
-            random_array = rng.sequence(primes=primes, pixel_seed=seed, length=sys.argv[2], rnd_range=int(sys.argv[3]))
-            for number in random_array:
-                file.write(f'{number}\n')
+            [(file.write(f'{number}\n'), random_array.append(number)) for number in rng.sequence(primes=primes, pixel_seed=seed, length=sys.argv[2], rnd_range=int(sys.argv[3]))]
 
         file.close()
         end = time.time()
